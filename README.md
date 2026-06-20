@@ -54,13 +54,12 @@ We recommend creating a fresh conda environment first (Python 3.10–3.12):
 ```bash
 conda create -n dots_tts python=3.10 -y
 conda activate dots_tts
-```
-
-Then install from source:
-
-```bash
 python -m pip install --upgrade pip
-python -m pip install -e . -c constraints/recommended.txt
+conda install -c conda-forge pynini openfst -y
+pip install -e .
+pip uninstall torch torchaudio -y
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+python apps/gradio/app.py --model-name-or-path rednote-hilab/dots.tts-soar --precision float16
 ```
 
 For training / linting extras:
